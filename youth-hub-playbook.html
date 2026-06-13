@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Leadership Hub — Operational Playbook</title>
+<style>
+  :root {
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #0F6E56;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --amber: #EF9F27;
+    --amber-light: #FAEEDA;
+    --coral: #D85A30;
+    --coral-light: #FAECE7;
+    --blue: #378ADD;
+    --blue-light: #E6F1FB;
+    --gray: #5F5E5A;
+    --gray-light: #F1EFE8;
+    --text: #1a1a18;
+    --text-muted: #5F5E5A;
+    --border: #e2e0d8;
+    --bg: #fafaf8;
+    --white: #ffffff;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7}
+  a{color:var(--green);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0 2rem}
+  .nav-inner{max-width:1100px;margin:auto;display:flex;align-items:center;gap:0;height:56px}
+  .nav-logo{font-weight:700;font-size:15px;color:var(--green);margin-right:2rem;white-space:nowrap;display:flex;align-items:center;gap:8px}
+  .nav-logo span{display:inline-block;background:var(--green);color:#fff;width:28px;height:28px;border-radius:6px;text-align:center;line-height:28px;font-size:14px}
+  .nav-links{display:flex;gap:0;overflow-x:auto}
+  .nav-links a{font-size:13px;color:var(--text-muted);padding:0 14px;height:56px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s}
+  .nav-links a:hover,.nav-links a.active{color:var(--green);border-bottom-color:var(--green);text-decoration:none}
+  .nav-cta{margin-left:auto;background:var(--green);color:#fff;font-size:13px;font-weight:600;padding:7px 16px;border-radius:var(--radius-sm);white-space:nowrap}
+  .nav-cta:hover{background:var(--green-dark);text-decoration:none}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#0c4a36 0%,#1D9E75 60%,#5DCAA5 100%);color:#fff;padding:80px 2rem 70px}
+  .hero-inner{max-width:860px;margin:auto}
+  .hero-tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin-bottom:14px}
+  .hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.15;margin-bottom:16px}
+  .hero h1 em{font-style:normal;color:#9FE1CB}
+  .hero p{font-size:18px;opacity:.9;max-width:620px;margin-bottom:28px;line-height:1.6}
+  .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+  .hero-stat .num{font-size:28px;font-weight:800}
+  .hero-stat .lbl{font-size:13px;opacity:.75}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+  .btn-white{background:#fff;color:var(--green);font-weight:700;padding:11px 24px;border-radius:var(--radius-sm);font-size:14px}
+  .btn-outline{border:2px solid rgba(255,255,255,.5);color:#fff;font-weight:600;padding:11px 24px;border-radius:var(--radius-sm);font-size:14px}
+  .btn-white:hover,.btn-outline:hover{text-decoration:none;opacity:.9}
+
+  /* LAYOUT */
+  .container{max-width:1100px;margin:auto;padding:0 2rem}
+  section{padding:64px 2rem}
+  section:nth-child(even){background:var(--white)}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+  .section-title{font-size:clamp(22px,3vw,30px);font-weight:800;margin-bottom:10px}
+  .section-sub{font-size:16px;color:var(--text-muted);max-width:600px;margin-bottom:36px}
+
+  /* CARDS */
+  .card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem}
+  .card-green{border-left:3px solid var(--green)}
+  .card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+  .card p,.card li{font-size:14px;color:var(--text-muted);line-height:1.7}
+  .card ul{padding-left:1.1rem}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+
+  /* BADGES */
+  .badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-right:4px;margin-bottom:4px}
+  .b-green{background:var(--green-light);color:var(--green-dark)}
+  .b-purple{background:var(--purple-light);color:var(--purple)}
+  .b-amber{background:var(--amber-light);color:#854F0B}
+  .b-coral{background:var(--coral-light);color:#993C1D}
+  .b-blue{background:var(--blue-light);color:#185FA5}
+
+  /* METRICS */
+  .metric{background:var(--gray-light);border-radius:var(--radius);padding:1.25rem;text-align:center}
+  .metric .num{font-size:26px;font-weight:800;color:var(--green)}
+  .metric .lbl{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+  /* TOC CHAIN */
+  .toc-chain{display:flex;flex-direction:column;gap:0}
+  .toc-node{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:4px;position:relative}
+  .toc-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .toc-node h4{font-size:15px;font-weight:700;margin-bottom:3px}
+  .toc-node p{font-size:13px;color:var(--text-muted)}
+  .toc-arrow{text-align:center;color:var(--green);font-size:20px;line-height:1;margin:2px 0}
+
+  /* JOURNEY */
+  .journey{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .journey-phase{padding:1.25rem;border-right:1px solid var(--border)}
+  .journey-phase:last-child{border-right:none}
+  .journey-phase .phase-n{font-size:28px;font-weight:800;color:var(--green);opacity:.3;line-height:1}
+  .journey-phase h4{font-size:14px;font-weight:700;margin:6px 0 8px}
+  .journey-phase p{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+  /* CALENDAR */
+  .cal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .cal-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .cal-head{padding:8px 14px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--white)}
+  .cal-body{padding:12px 14px;font-size:13px;color:var(--text-muted);line-height:1.7}
+  .q1 .cal-head{background:#1D9E75}
+  .q2 .cal-head{background:#534AB7}
+  .q3 .cal-head{background:#EF9F27}
+  .q4 .cal-head{background:#D85A30}
+
+  /* GOVERNANCE */
+  .gov-table{width:100%;border-collapse:collapse}
+  .gov-table th{font-size:12px;font-weight:600;color:var(--text-muted);text-align:left;padding:8px 12px;border-bottom:2px solid var(--border)}
+  .gov-table td{padding:12px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:top}
+  .gov-table tr:last-child td{border-bottom:none}
+  .gov-table td:first-child{font-weight:600;white-space:nowrap}
+
+  /* FUNDING */
+  .fund-bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .fund-bar-row .lbl{font-size:13px;color:var(--text-muted);min-width:200px}
+  .bar-wrap{flex:1;background:var(--gray-light);border-radius:4px;height:10px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:4px;transition:width .6s}
+  .fund-bar-row .pct{font-size:13px;font-weight:700;min-width:36px;text-align:right}
+
+  /* PILOT */
+  .pilot-table{width:100%;border-collapse:collapse;font-size:14px}
+  .pilot-table th{font-size:12px;color:var(--text-muted);font-weight:600;padding:8px 12px;border-bottom:2px solid var(--border);text-align:left}
+  .pilot-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  .pilot-table tr:last-child td{border-bottom:none}
+  .status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .s-green{background:#1D9E75}
+  .s-amber{background:#EF9F27}
+  .s-red{background:#D85A30}
+
+  /* CHECKLIST */
+  .check-section{margin-bottom:28px}
+  .check-section-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+  .check-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)}
+  .check-item:last-child{border-bottom:none}
+  .chk{width:20px;height:20px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .chk:hover{border-color:var(--green)}
+  .chk.done{background:var(--green);border-color:var(--green)}
+  .chk.done::after{content:'✓';font-size:11px;color:#fff;font-weight:700}
+  .check-text{font-size:14px;color:var(--text-muted);line-height:1.5}
+  .progress-bar-wrap{background:var(--gray-light);border-radius:4px;height:8px;overflow:hidden;margin-bottom:6px}
+  .progress-fill{height:100%;background:var(--green);border-radius:4px;transition:width .3s}
+  .progress-lbl{font-size:12px;color:var(--text-muted)}
+
+  /* PRINCIPLES */
+  .principle{border-left:3px solid var(--green);padding:12px 16px;margin-bottom:10px;background:var(--white);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+  .principle .source{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+  .principle p{font-size:14px;color:var(--text-muted)}
+
+  /* FOOTER */
+  footer{background:#0c4a36;color:rgba(255,255,255,.8);padding:40px 2rem;text-align:center}
+  footer h3{color:#fff;font-size:18px;margin-bottom:8px}
+  footer p{font-size:14px;margin-bottom:16px}
+  footer .footer-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  footer .footer-badge{background:rgba(255,255,255,.12);border-radius:20px;padding:4px 14px;font-size:12px}
+
+  @media(max-width:700px){
+    .journey{grid-template-columns:1fr}
+    .journey-phase{border-right:none;border-bottom:1px solid var(--border)}
+    .journey-phase:last-child{border-bottom:none}
+    .hero-stats{gap:20px}
+    .fund-bar-row .lbl{min-width:130px}
+    .nav-links a{padding:0 10px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><span>YH</span> Youth Hub Playbook</div>
+    <div class="nav-links">
+      <a href="#toc">Theory of change</a>
+      <a href="#model">Hub model</a>
+      <a href="#governance">Governance</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#funding">Funding</a>
+      <a href="#pilot">Pilot</a>
+      <a href="#checklist">Checklist</a>
+    </div>
+    <a href="#checklist" class="nav-cta">Launch guide →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Challenge 2.3 · Strategic Consulting · Open-source kit</div>
+    <h1>A playbook for <em>Youth Leadership Hubs</em> in semi-urban India</h1>
+    <p>A free, replicable, volunteer-run model for civic engagement — designed for Tier-2 and Tier-3 towns where no structured youth platform exists.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">25 Cr</div><div class="lbl">Indian youth aged 15–24</div></div>
+      <div class="hero-stat"><div class="num">12 mo</div><div class="lbl">Turnkey activity calendar</div></div>
+      <div class="hero-stat"><div class="num">₹3.6L</div><div class="lbl">Minimum viable annual budget</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">Paid full-time staff needed</div></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#checklist" class="btn-white">Start the replication checklist</a>
+      <a href="#model" class="btn-outline">Explore the model</a>
+    </div>
+  </div>
+</div>
+
+<!-- THEORY OF CHANGE -->
+<section id="toc">
+  <div class="container">
+    <div class="section-label">Theory of change</div>
+    <div class="section-title">Working backwards from civic impact</div>
+    <div class="section-sub">Using Pravah's "5th Space" framing — outcomes defined first, activities designed to serve them.</div>
+
+    <div class="toc-chain" style="max-width:720px">
+      <div class="toc-node">
+        <div class="toc-icon" style="background:#E1F5EE">🎯</div>
+        <div><h4>Long-term outcome · Year 3–5</h4><p>Measurable rise in voter registration, volunteerism rates, and local problem-solving initiatives in hub towns — independently verified by partner organisations.</p></div>
+      </div>
+      <div class="toc-arrow">↑</div>
+      <div class="toc-node">
+        <div class="toc-icon" style="background:#EEEDFE">👥</div>
+        <div><h4>Medium-term outcome · Year 1–2</h4><p>Youth adopt civic identities — they see themselves as actors, not spectators. Peer-led initiatives emerge. Alumni re-invest as facilitators for the next cohort.</p></div>
+      </div>
+      <div class="toc-arrow">↑</div>
+      <div class="toc-node">
+        <div class="toc-icon" style="background:#FAEEDA">📚</div>
+        <div><h4>Short-term output · Month 1–6</h4><p>20–30 youth complete the 90-day foundational curriculum. They run one community action project. Hub governance is fully functional without paid staff.</p></div>
+      </div>
+      <div class="toc-arrow">↑</div>
+      <div class="toc-node">
+        <div class="toc-icon" style="background:#FAECE7">🛠</div>
+        <div><h4>Activities &amp; inputs</h4><p>Weekly sessions, civic dialogue circles, skill sprints, local field immersions, peer mentoring pairs, and a quarterly community action project.</p></div>
+      </div>
+      <div class="toc-arrow">↑</div>
+      <div class="toc-node">
+        <div class="toc-icon" style="background:#E6F1FB">📍</div>
+        <div><h4>Preconditions &amp; assumptions</h4><p>A neutral physical space exists; at least 2 trained volunteer facilitators; a local institution (school, panchayat, or NGO) provides an anchor partnership.</p></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:700;margin:40px 0 16px">Design principles from existing models</h3>
+    <div class="principle"><div class="source">Pravah</div><p>Safe, non-judgmental space ("5th Space") with reflective practice as the pedagogic core — not information delivery.</p></div>
+    <div class="principle"><div class="source">ComMutiny</div><p>Youth-as-change-agents framing. Asset-based, not deficit — the young person is a resource to communities, not a problem to be solved.</p></div>
+    <div class="principle"><div class="source">India Fellow</div><p>Learning through doing. Structured reflection journals and peer learning circles as the engine of growth.</p></div>
+    <div class="principle"><div class="source">Barefoot College</div><p>Non-formal education works at scale. The rural/semi-urban context is an asset, not a constraint on quality.</p></div>
+    <div class="principle"><div class="source">YouthBuild (USA)</div><p>Service + skill + leadership, combined. Alumni return as next-cohort facilitators — the self-sustaining loop.</p></div>
+  </div>
+</section>
+
+<!-- HUB MODEL -->
+<section id="model">
+  <div class="container">
+    <div class="section-label">Hub model</div>
+    <div class="section-title">How the hub runs without a paid coordinator</div>
+    <div class="section-sub">Designed from the ground up for zero full-time staff — powered by rotating peer leadership and alumni re-investment.</div>
+
+    <div class="grid2" style="margin-bottom:24px">
+      <div class="card card-green">
+        <h3>🏫 Physical space</h3>
+        <p>Partner with a government school, library, or community hall for 2 evenings per week and Saturday mornings. MOUs, not cash leases. Minimum: one room, chairs, whiteboard, Wi-Fi.</p>
+      </div>
+      <div class="card card-green">
+        <h3>👤 Membership</h3>
+        <p>Open to 15–24 year-olds. No fees for the first cohort. Subsequent cohorts pay ₹100/month (waivable) — creating psychological ownership, not revenue. Cohort size: 20–35 members.</p>
+      </div>
+      <div class="card card-green">
+        <h3>🔄 Self-sustaining loop</h3>
+        <p>Cohort 1 alumni become Cohort 2 peer-facilitators. They receive a ₹500/month facilitator stipend crowd-funded from alumni dues and local business. No external coordinator after Month 10.</p>
+      </div>
+      <div class="card card-green">
+        <h3>🛡 Political neutrality</h3>
+        <p>Hub charter bans partisan activity. Civic dialogue follows structured protocols (not debate format). Facilitators trained in facilitation-not-persuasion. All external speakers sign a neutrality pledge.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;font-weight:700;margin-bottom:16px">The 90-day member journey</h3>
+    <div class="journey" style="margin-bottom:28px">
+      <div class="journey-phase">
+        <div class="phase-n">01</div>
+        <h4>Days 1–30 · Orientation &amp; identity</h4>
+        <p>Welcome circle → community mapping → "who am I as a civic actor?" reflection → peer-pair assignment → first civic dialogue</p>
+      </div>
+      <div class="journey-phase">
+        <div class="phase-n">02</div>
+        <h4>Days 31–60 · Skills &amp; exposure</h4>
+        <p>Choose 2 skill sprints (public speaking / digital literacy / financial basics / gender equity) → field immersion with a local institution</p>
+      </div>
+      <div class="journey-phase">
+        <div class="phase-n">03</div>
+        <h4>Days 61–90 · Action &amp; reflection</h4>
+        <p>Small team designs and executes one community action project → public presentation → "My Civic Commitment" pledge ceremony</p>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--green-light);border-color:#9FE1CB">
+      <h3 style="color:var(--green-dark)">Gender inclusion — non-negotiables</h3>
+      <ul style="margin-top:8px">
+        <li>Minimum 50% women in every cohort — actively recruited, not just welcome.</li>
+        <li>Women-only "safe circle" sessions held monthly alongside mixed sessions.</li>
+        <li>At least one woman in every governance body at all times (charter-mandated).</li>
+        <li>Sessions scheduled to avoid conflict with domestic responsibilities — weekend mornings preferred.</li>
+        <li>Female facilitators recruited and trained first; they anchor the women's cohort.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GOVERNANCE -->
+<section id="governance">
+  <div class="container">
+    <div class="section-label">Governance</div>
+    <div class="section-title">Flat, rotational, volunteer-led</div>
+    <div class="section-sub">No single point of failure. Every role has a successor pipeline baked in.</div>
+
+    <div style="overflow-x:auto;margin-bottom:28px">
+      <table class="gov-table" style="width:100%">
+        <thead>
+          <tr>
+            <th>Role</th><th>Count</th><th>Term</th><th>Responsibilities</th><th>Constraint</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge b-green">Hub Steward</span></td>
+            <td>2</td>
+            <td>6 months, rotating</td>
+            <td>Chairs weekly sessions, signs MOUs, manages bank account (dual signatory)</td>
+            <td>Cannot serve consecutive terms</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-purple">Programme Lead</span></td>
+            <td>2</td>
+            <td>6 months</td>
+            <td>Owns activity calendar and session quality. Recruits and briefs facilitators. Post-session check-ins.</td>
+            <td>Can overlap with Steward only in first 3 months</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-amber">Finance Keeper</span></td>
+            <td>1</td>
+            <td>12 months</td>
+            <td>Tracks all income/expenses in a shared Google Sheet visible to all members. Monthly one-page financial summary.</td>
+            <td>Cannot approve own expenses</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-blue">Community Liaison</span></td>
+            <td>1</td>
+            <td>12 months</td>
+            <td>Manages relationship with host institution and local government. Keeps a stakeholder register updated quarterly.</td>
+            <td>Must disclose any conflicts of interest in writing</td>
+          </tr>
+          <tr>
+            <td><span class="badge b-coral">Alumni Council</span></td>
+            <td>Advisory</td>
+            <td>Open</td>
+            <td>Past members who completed 2+ cohorts. No voting power but right to attend all meetings. Provides institutional memory.</td>
+            <td>Cannot take operational roles while on council</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Decision-making protocol</h3>
+        <ul style="margin-top:8px">
+          <li><strong>Routine</strong> (session topics, guest speakers): Programme Lead decides, informs at next meeting.</li>
+          <li><strong>Resources above ₹5,000</strong>: Both Stewards + Finance Keeper must agree.</li>
+          <li><strong>Charter amendments</strong>: ¾ majority of active members at a called meeting.</li>
+          <li><strong>Conflict resolution</strong>: 3-person panel — 1 Steward + 1 Alumni + 1 member elected on the day.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Accountability mechanisms</h3>
+        <ul style="margin-top:8px">
+          <li>Monthly open finances on shared Google Sheet — any member can view.</li>
+          <li>Quarterly "hub health check" — 10-question survey completed anonymously by all members.</li>
+          <li>Annual stakeholder meet with community audience — open to non-members.</li>
+          <li>Public impact report published each December — one page, member-authored.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar">
+  <div class="container">
+    <div class="section-label">12-month activity calendar</div>
+    <div class="section-title">A full year of programming</div>
+    <div class="section-sub">Designed for a January launch — adjust start month as needed. Each quarter has a distinct theme.</div>
+
+    <div class="cal-grid">
+      <div class="cal-card q1">
+        <div class="cal-head">January · Month 1 · Foundation</div>
+        <div class="cal-body">Community mapping workshop · Member recruitment drive · Hub charter co-creation · First weekly circle</div>
+      </div>
+      <div class="cal-card q1">
+        <div class="cal-head">February · Month 2 · Identity</div>
+        <div class="cal-body">Orientation cohort begins · Peer-pair assignments · Skill sprint 1: public speaking · Local government field visit</div>
+      </div>
+      <div class="cal-card q1">
+        <div class="cal-head">March · Month 3 · Action</div>
+        <div class="cal-body">Skill sprint 2: digital literacy · Civic dialogue #1 (water/sanitation) · Community action project kick-off · Women's Day programming</div>
+      </div>
+      <div class="cal-card q2">
+        <div class="cal-head">April · Month 4 · Execution</div>
+        <div class="cal-body">Community action project execution · Mid-cohort reflection retreat (half-day) · Guest: local elected representative Q&amp;A · Finance keeper training</div>
+      </div>
+      <div class="cal-card q2">
+        <div class="cal-head">May · Month 5 · Celebration</div>
+        <div class="cal-body">Project public presentation · Civic commitment pledges · Cohort 1 graduation ceremony · Recruitment opens for Cohort 2</div>
+      </div>
+      <div class="cal-card q2">
+        <div class="cal-head">June · Month 6 · Transition</div>
+        <div class="cal-body">Summer skill camp (3 days) · Cohort 1 → peer facilitator training · Civic dialogue #2 (environment/climate) · Mid-year financial review</div>
+      </div>
+      <div class="cal-card q3">
+        <div class="cal-head">July · Month 7 · Renewal</div>
+        <div class="cal-body">Cohort 2 orientation begins · Steward elections (rotating) · Skill sprint 3: financial basics · Local media literacy session</div>
+      </div>
+      <div class="cal-card q3">
+        <div class="cal-head">August · Month 8 · Civic pride</div>
+        <div class="cal-body">Independence Day civic event (open public) · Skill sprint 4: gender equity · Cohort 2 action project planning · Alliance outreach to 2 new CSR partners</div>
+      </div>
+      <div class="cal-card q3">
+        <div class="cal-head">September · Month 9 · Network</div>
+        <div class="cal-body">Civic dialogue #3 (livelihood/jobs) · Inter-hub youth exchange (if network exists) · Action project mid-point check · Alumni council formation</div>
+      </div>
+      <div class="cal-card q4">
+        <div class="cal-head">October · Month 10 · Accountability</div>
+        <div class="cal-body">Cohort 2 project execution · Annual stakeholder meet · Annual report draft (member-led) · Hub self-assessment vs success metrics</div>
+      </div>
+      <div class="cal-card q4">
+        <div class="cal-head">November · Month 11 · Handover</div>
+        <div class="cal-body">Cohort 2 graduation · Voter registration drive (18+ members) · New Steward elections · Replication kit sharing with 2 partner towns</div>
+      </div>
+      <div class="cal-card q4">
+        <div class="cal-head">December · Month 12 · Legacy</div>
+        <div class="cal-body">Year-end civic fair (public event) · Annual impact report publication · Cohort 3 planning · Full hub celebration and reflection</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING -->
+<section id="funding">
+  <div class="container">
+    <div class="section-label">Funding model</div>
+    <div class="section-title">Minimum viable budget: ₹3,60,000/year</div>
+    <div class="section-sub">Diversified across 5 sources. No single funder above 40% — independence is the product.</div>
+
+    <div class="grid2" style="margin-bottom:28px">
+      <div class="card">
+        <h3 style="margin-bottom:16px">Revenue mix</h3>
+        <div class="fund-bar-row">
+          <span class="lbl">Local business sponsorship</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:35%;background:#1D9E75"></div></div>
+          <span class="pct" style="color:#1D9E75">35%</span>
+        </div>
+        <div class="fund-bar-row">
+          <span class="lbl">Municipal / panchayat grant</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:25%;background:#534AB7"></div></div>
+          <span class="pct" style="color:#534AB7">25%</span>
+        </div>
+        <div class="fund-bar-row">
+          <span class="lbl">CSR from district SMEs</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:20%;background:#EF9F27"></div></div>
+          <span class="pct" style="color:#854F0B">20%</span>
+        </div>
+        <div class="fund-bar-row">
+          <span class="lbl">Alumni dues (₹100/month)</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:12%;background:#D85A30"></div></div>
+          <span class="pct" style="color:#993C1D">12%</span>
+        </div>
+        <div class="fund-bar-row">
+          <span class="lbl">Events / skill camp fees</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:8%;background:#378ADD"></div></div>
+          <span class="pct" style="color:#185FA5">8%</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px">Annual expenditure breakdown</h3>
+        <table style="width:100%;font-size:13px;border-collapse:collapse">
+          <tr><td style="padding:5px 0;color:var(--text-muted)">Facilitator stipends (2 × ₹500 × 12)</td><td style="text-align:right;font-weight:600">₹12,000</td></tr>
+          <tr><td style="padding:5px 0;color:var(--text-muted)">Session materials &amp; stationery</td><td style="text-align:right;font-weight:600">₹18,000</td></tr>
+          <tr><td style="padding:5px 0;color:var(--text-muted)">Field visits &amp; transport</td><td style="text-align:right;font-weight:600">₹30,000</td></tr>
+          <tr><td style="padding:5px 0;color:var(--text-muted)">Events (graduation + civic fair)</td><td style="text-align:right;font-weight:600">₹40,000</td></tr>
+          <tr><td style="padding:5px 0;color:var(--text-muted)">Printing, banners, documentation</td><td style="text-align:right;font-weight:600">₹15,000</td></tr>
+          <tr><td style="padding:5px 0;color:var(--text-muted)">Contingency (10%)</td><td style="text-align:right;font-weight:600">₹11,500</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td style="padding:8px 0 0;font-weight:700">Total operational cost</td><td style="text-align:right;font-weight:700;color:var(--green)">₹1,26,500</td></tr>
+          <tr><td colspan="2" style="font-size:12px;color:var(--text-muted);padding-top:4px">Surplus from ₹3.6L budget → next-year seed fund for replication</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--amber-light);border-color:#FAC775">
+      <h3 style="color:#854F0B">Fundraising principles</h3>
+      <ul style="margin-top:8px">
+        <li>No single funder above 40% — preserves programmatic independence.</li>
+        <li>All sponsorships in a public register; no anonymous donors.</li>
+        <li>Business sponsors get recognition, not programming influence. Separate acknowledgement from endorsement.</li>
+        <li>Panchayat grants tied to activity reports, not ideology or political alignment.</li>
+        <li>After Year 1, target one FCRA-registered NGO co-host to unlock grant access.</li>
+        <li>Alumni dues create psychological ownership and community accountability — not primarily revenue.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT -->
+<section id="pilot">
+  <div class="container">
+    <div class="section-label">Pilot feasibility analysis</div>
+    <div class="section-title">Belagavi, Karnataka</div>
+    <div class="section-sub">Population ~600,000 · Tier-2 city · Strong college presence but weak non-college youth infrastructure.</div>
+
+    <div style="overflow-x:auto;margin-bottom:24px">
+      <table class="pilot-table">
+        <thead>
+          <tr><th>Factor</th><th>Status</th><th>Assessment</th><th>Action needed</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Physical space</strong></td>
+            <td><span class="status s-green"></span>Strong</td>
+            <td>3 government high schools with available evening space identified</td>
+            <td>MOU with BBMP equivalent; ~2-week approval process</td>
+          </tr>
+          <tr>
+            <td><strong>Facilitator pipeline</strong></td>
+            <td><span class="status s-green"></span>Strong</td>
+            <td>KSOU students actively seeking volunteering hours for credit</td>
+            <td>Run 2-day facilitator training before launch</td>
+          </tr>
+          <tr>
+            <td><strong>Local anchor</strong></td>
+            <td><span class="status s-amber"></span>Moderate</td>
+            <td>Jan Vikas Sanstha active but NGO-led model may create dependency</td>
+            <td>Position hub as independent — JVS as resource partner only</td>
+          </tr>
+          <tr>
+            <td><strong>Business CSR</strong></td>
+            <td><span class="status s-amber"></span>Moderate</td>
+            <td>Sugar cooperatives and textile SMEs present; CSR budgets exist</td>
+            <td>Pitch as "employee children programme" not charity optics</td>
+          </tr>
+          <tr>
+            <td><strong>Panchayat support</strong></td>
+            <td><span class="status s-amber"></span>Moderate</td>
+            <td>Corporation willing but dependent on political cycle</td>
+            <td>Build relationship at ward level, not corporation level</td>
+          </tr>
+          <tr>
+            <td><strong>Gender context</strong></td>
+            <td><span class="status s-red"></span>Requires care</td>
+            <td>Conservative pockets; dropout rates for girls post-15 are elevated</td>
+            <td>Women-only recruitment sessions; parental consent protocol</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid4">
+      <div class="metric"><div class="num">83%</div><div class="lbl">Retention forecast (Cohort 1)</div></div>
+      <div class="metric"><div class="num">3–4</div><div class="lbl">Community projects Year 1</div></div>
+      <div class="metric"><div class="num">60%</div><div class="lbl">Alumni → facilitator conversion</div></div>
+      <div class="metric"><div class="num">70%</div><div class="lbl">Local-funded by Month 12</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="container">
+    <div class="section-label">Replication checklist</div>
+    <div class="section-title">Any volunteer team can launch using this alone</div>
+    <div class="section-sub">20 steps across 4 phases. Check each off as you go — progress saves in this session.</div>
+
+    <div style="margin-bottom:24px">
+      <div class="progress-bar-wrap"><div class="progress-fill" id="main-prog" style="width:0%"></div></div>
+      <div class="progress-lbl" id="prog-lbl">0 of 20 steps completed</div>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="check-section">
+          <div class="check-section-title">Phase A · Before launch (Weeks 1–4)</div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Identify and meet 5 potential youth members from the target town</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Secure a physical space via MOU — school, library, or community hall</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Recruit 2 volunteer facilitators and run a 2-day facilitator training</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Identify a local institution anchor (NGO, panchayat, school) as partner</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Open a zero-balance bank account in the hub's name (dual signatory)</div></div>
+        </div>
+        <div class="check-section">
+          <div class="check-section-title">Phase B · Launch (Weeks 5–8)</div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Co-create the hub charter with founding members (neutrality clause mandatory)</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Enrol 20–35 members; collect signed membership forms</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Elect first Hub Stewards and Programme Leads via open vote</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Set up shared Google Sheet for finances — visible to all members</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Secure first 3 months of funding before announcing cohort start date</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="check-section">
+          <div class="check-section-title">Phase C · First 90 days</div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Complete 12 weekly sessions following the 90-day journey structure</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Run all 4 skill sprints with at least 70% member attendance</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Execute at least 1 community action project with external stakeholders</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Hold mid-cohort reflection retreat — 4–6 hours, off-site if possible</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Run Cohort 1 graduation with community audience of 30+ people</div></div>
+        </div>
+        <div class="check-section">
+          <div class="check-section-title">Phase D · Sustainability (Months 4–12)</div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Convert at least 5 Cohort 1 alumni into Cohort 2 peer facilitators</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Diversify funding to 3+ sources; no single source above 40%</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Publish a one-page annual impact report (member-led, publicly accessible)</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Complete self-assessment against success metrics; share with endorsing org</div></div>
+          <div class="check-item"><div class="chk" onclick="tog(this)"></div><div class="check-text">Share replication kit and lessons with 2 partner towns or organisations</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h3>Youth Leadership Hub Playbook</h3>
+  <p>A free, open-source kit designed to seed hundreds of youth hubs across India over 3–5 years.<br>Built for Challenge 2.3 · Strategic Consulting Track</p>
+  <div class="footer-badges">
+    <span class="footer-badge">Open source</span>
+    <span class="footer-badge">No paid staff required</span>
+    <span class="footer-badge">Gender-inclusive by design</span>
+    <span class="footer-badge">Politically neutral</span>
+    <span class="footer-badge">Replicable anywhere</span>
+  </div>
+  <p style="margin-top:20px;font-size:12px;opacity:.5">Inspired by Pravah · ComMutiny · India Fellow · Barefoot College · YouthBuild</p>
+</footer>
+
+<script>
+  function tog(el){
+    el.classList.toggle('done');
+    const total=document.querySelectorAll('.chk').length;
+    const done=document.querySelectorAll('.chk.done').length;
+    document.getElementById('prog-lbl').textContent=done+' of '+total+' steps completed';
+    document.getElementById('main-prog').style.width=Math.round(done/total*100)+'%';
+  }
+
+  // Active nav highlight on scroll
+  const sections=document.querySelectorAll('section[id]');
+  const navLinks=document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    sections.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id});
+    navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
+  });
+</script>
+</body>
+</html>
